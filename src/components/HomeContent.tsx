@@ -12,6 +12,8 @@ const models = [
   { id: "grok", icon: "⚡", company: "xAI" },
   { id: "llama", icon: "🦙", company: "Meta" },
   { id: "mistral", icon: "🎯", company: "Mistral AI" },
+  { id: "perplexity", icon: "🔍", company: "Perplexity AI" },
+  { id: "deepseek", icon: "🌊", company: "DeepSeek" },
 ];
 
 export default function HomeContent({ locale }: { locale: string }) {

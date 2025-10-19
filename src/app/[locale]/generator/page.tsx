@@ -12,6 +12,10 @@ const models = [
   { id: "grok", name: "Grok (xAI)", emoji: "⚡" },
   { id: "llama", name: "Llama (Meta)", emoji: "🦙" },
   { id: "mistral", name: "Mistral AI", emoji: "🎯" },
+  { id: "perplexity", name: "Perplexity AI", emoji: "🔍" },
+  { id: "deepseek", name: "DeepSeek", emoji: "🌊" },
+  { id: "copilot", name: "Microsoft Copilot", emoji: "💼" },
+  { id: "bard", name: "Google Bard", emoji: "🎨" },
 ];
 
 const tones = ["Profesional", "Casual", "Académico", "Creativo", "Detallado"];
