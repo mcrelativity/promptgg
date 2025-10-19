@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "home": "Home",
+    "generator": "Generator",
+    "guide": "Guide",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Effective AI Prompts",
+    "subtitle": "Master the art of crafting powerful prompts that get exceptional results",
+    "description": "PromptGG helps you craft powerful prompts for ChatGPT, Claude, Gemini and more. Get proven techniques, best practices and examples for each model.",
+    "cta": "Get Started",
+    "secondary": "View Guide"
+  },
+  "models": {
+    "title": "Supported Models",
+    "subtitle": "Specialized guides for each platform",
+    "chatgpt": "ChatGPT",
+    "chatgpt_desc": "OpenAI",
+    "claude": "Claude",
+    "claude_desc": "Anthropic",
+    "gemini": "Gemini",
+    "gemini_desc": "Google",
+    "grok": "Grok",
+    "grok_desc": "xAI",
+    "llama": "Llama",
+    "llama_desc": "Meta",
+    "mistral": "Mistral",
+    "mistral_desc": "Mistral AI"
+  },
+  "generator": {
+    "title": "Prompt Generator",
+    "selectModel": "Select a Model",
+    "task": "What do you want it to do?",
+    "tone": "Tone",
+    "context": "Context (Optional)",
+    "constraints": "Constraints (Optional)",
+    "generate": "Generate Prompt",
+    "copy": "Copy",
+    "save": "Save",
+    "copied": "Copied!",
+    "saved": "Saved!"
+  },
+  "guide": {
+    "title": "Guide to Effective Prompts",
+    "be_specific": "Be Specific",
+    "be_specific_desc": "Provide clear details about what you want. Vague prompts produce vague results.",
+    "context_matters": "Context Matters",
+    "context_matters_desc": "Provide relevant background so the AI understands your request better.",
+    "role_assignment": "Assign a Role",
+    "role_assignment_desc": "Tell the AI what role to assume. E.g: 'Act as an expert in...'",
+    "format_output": "Specify the Format",
+    "format_output_desc": "Indicate how you want the response presented (JSON, table, steps, etc).",
+    "examples": "Provide Examples",
+    "examples_desc": "Examples help the AI better understand what you expect.",
+    "iterate": "Iterate and Refine",
+    "iterate_desc": "Adjust the prompt based on results. Iteration improves outputs."
+  },
+  "footer": {
+    "made_by": "Made with ❤️ by",
+    "rights": "© 2025 PromptGG. All rights reserved.",
+    "contact": "Contact",
+    "github": "GitHub",
+    "twitter": "Twitter"
+  }
+}

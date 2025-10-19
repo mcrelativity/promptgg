@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "generator": "Generador",
+    "guide": "Guía",
+    "about": "Acerca",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Prompts Efectivos para IA",
+    "subtitle": "Domina el arte de hacer prompts que obtengan resultados excepcionales",
+    "description": "PromptGG te ayuda a craftsear prompts poderosos para ChatGPT, Claude, Gemini y más. Obtén técnicas probadas, mejores prácticas y ejemplos para cada modelo.",
+    "cta": "Comenzar",
+    "secondary": "Ver Guía"
+  },
+  "models": {
+    "title": "Modelos Soportados",
+    "subtitle": "Guías especializadas para cada plataforma",
+    "chatgpt": "ChatGPT",
+    "chatgpt_desc": "OpenAI",
+    "claude": "Claude",
+    "claude_desc": "Anthropic",
+    "gemini": "Gemini",
+    "gemini_desc": "Google",
+    "grok": "Grok",
+    "grok_desc": "xAI",
+    "llama": "Llama",
+    "llama_desc": "Meta",
+    "mistral": "Mistral",
+    "mistral_desc": "Mistral AI"
+  },
+  "generator": {
+    "title": "Generador de Prompts",
+    "selectModel": "Selecciona un Modelo",
+    "task": "¿Qué quieres que haga?",
+    "tone": "Tono",
+    "context": "Contexto (Opcional)",
+    "constraints": "Restricciones (Opcional)",
+    "generate": "Generar Prompt",
+    "copy": "Copiar",
+    "save": "Guardar",
+    "copied": "¡Copiado!",
+    "saved": "¡Guardado!"
+  },
+  "guide": {
+    "title": "Guía de Prompts Efectivos",
+    "be_specific": "Sé Específico",
+    "be_specific_desc": "Proporciona detalles claros sobre lo que deseas. Un prompt vago produce resultados vagos.",
+    "context_matters": "El Contexto Importa",
+    "context_matters_desc": "Proporciona antecedentes relevantes para que la IA entienda mejor tu solicitud.",
+    "role_assignment": "Asigna un Rol",
+    "role_assignment_desc": "Dile a la IA qué rol asumir. Ej: 'Actúa como un experto en...'",
+    "format_output": "Especifica el Formato",
+    "format_output_desc": "Indica cómo deseas que presente la respuesta (JSON, tabla, pasos, etc).",
+    "examples": "Proporciona Ejemplos",
+    "examples_desc": "Los ejemplos ayudan a la IA a entender mejor lo que esperas.",
+    "iterate": "Itera y Refina",
+    "iterate_desc": "Ajusta el prompt basado en los resultados. La iteración mejora los resultados."
+  },
+  "footer": {
+    "made_by": "Hecho con ❤️ por",
+    "rights": "© 2025 PromptGG. Todos los derechos reservados.",
+    "contact": "Contacto",
+    "github": "GitHub",
+    "twitter": "Twitter"
+  }
+}
