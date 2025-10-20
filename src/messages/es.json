@@ -3,6 +3,7 @@
     "home": "Inicio",
     "generator": "Generador",
     "guide": "Guía",
+    "history": "Historial",
     "about": "Acerca",
     "contact": "Contacto"
   },
@@ -92,6 +93,22 @@
     "tip4": "Asigna un rol a la IA: \"Actúa como un...\", \"Eres un experto en...\"",
     "tip5": "Proporciona ejemplos del resultado deseado cuando sea posible",
     "tip6": "Itera: Si el resultado no es perfecto, ajusta el prompt y prueba de nuevo"
+  },
+  "history": {
+    "title": "Historial de Prompts",
+    "subtitle": "Tus prompts guardados (solo Premium)",
+    "empty_title": "No tienes prompts guardados",
+    "empty_description": "Los prompts que guardes aparecerán aquí. Esta función solo está disponible para usuarios Premium.",
+    "upgrade_message": "Actualiza a Premium para guardar y acceder a tu historial de prompts",
+    "date": "Fecha",
+    "model": "Modelo",
+    "task": "Tarea",
+    "prompt": "Prompt",
+    "delete": "Eliminar",
+    "clear_all": "Limpiar Todo",
+    "confirm_delete": "¿Estás seguro de que quieres eliminar este prompt?",
+    "confirm_clear": "¿Estás seguro de que quieres eliminar todo el historial?",
+    "items_count": "{count} prompts guardados"
   },
   "premium": {
     "title": "Actualiza a Premium",

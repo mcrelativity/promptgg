@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Copy, Save, RefreshCw, Sparkles, Crown, Zap } from "lucide-react";
 import { usePremium } from "@/hooks/usePremium";
+import { usePromptHistory } from "@/hooks/usePromptHistory";
 import UpgradeModal from "@/components/UpgradeModal";
 import AdSenseSlot from "@/components/AdSenseSlot";
 
@@ -215,6 +216,9 @@ export default function Generator() {
     incrementUsage 
   } = usePremium();
 
+  // History hook
+  const { savePrompt } = usePromptHistory();
+
   const [selectedModel, setSelectedModel] = useState<string>(
     modelFromUrl || "chatgpt"
   );
@@ -223,17 +227,9 @@ export default function Generator() {
   const [context, setContext] = useState("");
   const [constraints, setConstraints] = useState("");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
-  const [savedPrompts, setSavedPrompts] = useState<string[]>([]);
   const [isCopied, setIsCopied] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
-
-  // Load saved prompts from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("savedPrompts");
-    if (saved) {
-      setSavedPrompts(JSON.parse(saved));
-    }
-  }, []);
 
   // Actualizar el tono cuando cambia el idioma
   useEffect(() => {
@@ -276,11 +272,25 @@ export default function Generator() {
   };
 
   const handleSave = () => {
-    if (generatedPrompt && !savedPrompts.includes(generatedPrompt)) {
-      const updated = [...savedPrompts, generatedPrompt];
-      setSavedPrompts(updated);
-      localStorage.setItem("savedPrompts", JSON.stringify(updated));
+    if (!generatedPrompt) return;
+    
+    // Solo usuarios premium pueden guardar
+    if (!isPremium) {
+      setShowUpgradeModal(true);
+      return;
     }
+
+    savePrompt({
+      model: selectedModel,
+      task,
+      tone,
+      context,
+      constraints,
+      generatedPrompt,
+    });
+
+    setIsSaved(true);
+    setTimeout(() => setIsSaved(false), 2000);
   };
 
   const handleClear = () => {
@@ -470,10 +480,14 @@ export default function Generator() {
                       </button>
                       <button
                         onClick={handleSave}
-                        className="flex-1 flex items-center justify-center gap-2 px-5 py-3 border border-slate-600 hover:border-slate-500 hover:bg-slate-800/50 rounded-lg font-semibold transition-all duration-300 transform hover:-translate-y-0.5"
+                        className={`flex-1 flex items-center justify-center gap-2 px-5 py-3 ${
+                          isSaved
+                            ? "bg-green-600 hover:bg-green-500"
+                            : "border border-slate-600 hover:border-slate-500 hover:bg-slate-800/50"
+                        } rounded-lg font-semibold transition-all duration-300 transform hover:-translate-y-0.5`}
                       >
                         <Save size={18} />
-                        {t("generator.save")}
+                        {isSaved ? t("generator.saved") : t("generator.save")}
                       </button>
                     </div>
                   </>

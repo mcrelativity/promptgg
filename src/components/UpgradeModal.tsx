@@ -26,10 +26,10 @@ export default function UpgradeModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-      <div className="relative w-full max-w-lg bg-gradient-to-br from-slate-900 to-slate-950 rounded-2xl border border-slate-700 shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/70 backdrop-blur-sm overflow-y-auto">
+      <div className="relative w-full max-w-lg my-8 bg-gradient-to-br from-slate-900 to-slate-950 rounded-2xl border border-slate-700 shadow-2xl">
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 pointer-events-none rounded-2xl" />
 
         {/* Close button */}
         <button
@@ -39,7 +39,7 @@ export default function UpgradeModal({
           <X size={20} />
         </button>
 
-        <div className="relative p-8">
+        <div className="relative p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
           {/* Icon */}
           <div className="flex justify-center mb-6">
             <div className="p-4 rounded-full bg-gradient-to-br from-yellow-500 to-orange-600">
