@@ -130,7 +130,7 @@ export default function ActivatePage() {
           {/* Help text */}
           <p className="text-center text-sm text-slate-500 mt-6">
             ¿No recibiste tu licencia?{" "}
-            <a href="mailto:support@promptgg.app" className="text-blue-400 hover:underline">
+            <a href="mailto:gomez.emiliano762@gmail.com" className="text-blue-400 hover:underline">
               Contacta soporte
             </a>
           </p>
