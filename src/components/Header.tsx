@@ -3,12 +3,16 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Crown } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { usePremium } from "@/hooks/usePremium";
+import UpgradeModal from "./UpgradeModal";
 
 export default function Header({ locale }: { locale: string }) {
   const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const { isPremium, usedToday, dailyLimit } = usePremium();
 
   return (
     <header className="fixed w-full top-0 z-50 bg-slate-950/95 backdrop-blur border-b border-slate-800">
@@ -34,10 +38,32 @@ export default function Header({ locale }: { locale: string }) {
           <Link href={`/${locale}/guide`} className="hover:text-blue-400 transition">
             {t("nav.guide")}
           </Link>
+          
+          {/* Premium Button */}
+          {!isPremium && (
+            <button
+              onClick={() => setShowUpgradeModal(true)}
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 rounded-lg font-medium transition"
+            >
+              <Crown size={16} />
+              {t("premium.upgradeButton")}
+            </button>
+          )}
         </div>
 
         {/* Language Switcher & Mobile Menu */}
         <div className="flex items-center gap-4">
+          {/* Premium Button Mobile */}
+          {!isPremium && (
+            <button
+              onClick={() => setShowUpgradeModal(true)}
+              className="md:hidden flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg text-sm font-medium"
+            >
+              <Crown size={14} />
+              Pro
+            </button>
+          )}
+          
           <LanguageSwitcher locale={locale} />
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -76,6 +102,14 @@ export default function Header({ locale }: { locale: string }) {
           </div>
         </div>
       )}
+      
+      {/* Upgrade Modal */}
+      <UpgradeModal
+        isOpen={showUpgradeModal}
+        onClose={() => setShowUpgradeModal(false)}
+        usedToday={usedToday}
+        dailyLimit={dailyLimit}
+      />
     </header>
   );
 }

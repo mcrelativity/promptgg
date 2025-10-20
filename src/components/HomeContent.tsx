@@ -2,9 +2,12 @@
 
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { ArrowRight, Sparkles, Brain, Zap } from "lucide-react";
+import { ArrowRight, Sparkles, Brain, Zap, Check, Crown } from "lucide-react";
 import ModelCard from "@/components/ModelCard";
 import AdSenseSlot from "@/components/AdSenseSlot";
+import { useState } from "react";
+import UpgradeModal from "./UpgradeModal";
+import { usePremium } from "@/hooks/usePremium";
 
 const models = [
   { id: "chatgpt", company: "OpenAI" },
@@ -19,6 +22,8 @@ const models = [
 
 export default function HomeContent({ locale }: { locale: string }) {
   const t = useTranslations();
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const { isPremium, usedToday, dailyLimit } = usePremium();
 
   return (
     <>
@@ -109,8 +114,108 @@ export default function HomeContent({ locale }: { locale: string }) {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Pricing Section */}
       <section className="py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              {t("premium.pricing_title")}
+            </h2>
+            <p className="text-xl text-slate-400">
+              {t("premium.pricing_subtitle")}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Plan Gratis */}
+            <div className="p-8 rounded-2xl bg-slate-800/50 border border-slate-700 hover:border-slate-600 transition">
+              <h3 className="text-2xl font-bold mb-2">{t("premium.free_title")}</h3>
+              <div className="flex items-baseline gap-2 mb-6">
+                <span className="text-4xl font-bold">{t("premium.free_price")}</span>
+                <span className="text-slate-400">{t("premium.perMonth")}</span>
+              </div>
+              
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3">
+                  <Check size={20} className="text-green-400 mt-0.5 flex-shrink-0" />
+                  <span>{t("premium.free_feature1")}</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check size={20} className="text-green-400 mt-0.5 flex-shrink-0" />
+                  <span>{t("premium.free_feature2")}</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check size={20} className="text-green-400 mt-0.5 flex-shrink-0" />
+                  <span>{t("premium.free_feature3")}</span>
+                </li>
+              </ul>
+
+              <Link
+                href={`/${locale}/generator`}
+                className="block w-full py-3 px-6 text-center border border-slate-600 rounded-lg font-semibold hover:bg-slate-700 transition"
+              >
+                {t("premium.free_cta")}
+              </Link>
+            </div>
+
+            {/* Plan Premium */}
+            <div className="relative p-8 rounded-2xl bg-gradient-to-br from-blue-500/10 to-purple-600/10 border-2 border-purple-500 hover:border-purple-400 transition">
+              {/* Badge Popular */}
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full text-sm font-bold">
+                {t("premium.popular")}
+              </div>
+
+              <h3 className="text-2xl font-bold mb-2 flex items-center gap-2">
+                <Crown className="text-yellow-400" size={24} />
+                {t("premium.premium_title")}
+              </h3>
+              <div className="flex items-baseline gap-2 mb-6">
+                <span className="text-4xl font-bold">{t("premium.premium_price")}</span>
+                <span className="text-slate-400">{t("premium.perMonth")}</span>
+              </div>
+              
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3">
+                  <Check size={20} className="text-green-400 mt-0.5 flex-shrink-0" />
+                  <span className="font-medium">{t("premium.premium_feature1")}</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check size={20} className="text-green-400 mt-0.5 flex-shrink-0" />
+                  <span className="font-medium">{t("premium.premium_feature2")}</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check size={20} className="text-green-400 mt-0.5 flex-shrink-0" />
+                  <span className="font-medium">{t("premium.premium_feature3")}</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check size={20} className="text-green-400 mt-0.5 flex-shrink-0" />
+                  <span className="font-medium">{t("premium.premium_feature4")}</span>
+                </li>
+              </ul>
+
+              {!isPremium ? (
+                <button
+                  onClick={() => setShowUpgradeModal(true)}
+                  className="block w-full py-3 px-6 text-center bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 rounded-lg font-bold transition transform hover:scale-105"
+                >
+                  {t("premium.premium_cta")}
+                </button>
+              ) : (
+                <div className="block w-full py-3 px-6 text-center bg-green-600 rounded-lg font-bold">
+                  ✓ {t("premium.premiumBadge")}
+                </div>
+              )}
+              
+              <p className="text-xs text-slate-400 text-center mt-4">
+                {t("premium.cancelAnytime")}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4 bg-slate-900/50">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             {t("hero.cta_title")}
@@ -126,6 +231,14 @@ export default function HomeContent({ locale }: { locale: string }) {
           </Link>
         </div>
       </section>
+
+      {/* Upgrade Modal */}
+      <UpgradeModal
+        isOpen={showUpgradeModal}
+        onClose={() => setShowUpgradeModal(false)}
+        usedToday={usedToday}
+        dailyLimit={dailyLimit}
+      />
     </>
   );
 }
