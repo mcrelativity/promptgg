@@ -2,7 +2,7 @@
 
 ## 🚀 Implementación Completa
 
-Sistema **Freemium** con cero costo de infraestructura y monetización inmediata usando **Stripe**.
+Sistema **Freemium** con cero costo de infraestructura y monetización **global** usando **Lemonsqueezy**.
 
 ---
 
@@ -22,10 +22,10 @@ Sistema **Freemium** con cero costo de infraestructura y monetización inmediata
   - 🚫 Sin anuncios
   - 💾 Historial guardado
 - Precio: $4.99/mes
-- Link directo a Stripe Payment Link
+- Link directo a Lemonsqueezy Checkout
 
 ### ✅ 3. Verificación de Licencia
-- Sistema de activación automática con Stripe session_id
+- Sistema de activación automática con Lemonsqueezy order_id
 - Persistencia en localStorage
 - Auto-verificación al cargar la app
 
@@ -33,7 +33,7 @@ Sistema **Freemium** con cero costo de infraestructura y monetización inmediata
 - `/[locale]/premium-success`
 - Confirmación visual de upgrade
 - Lista de beneficios desbloqueados
-- Activación automática con session_id de Stripe
+- Activación automática con order_id de Lemonsqueezy
 
 ### ✅ 5. Preparación para AdSense
 - Componente `<AdSenseSlot />`
@@ -46,61 +46,179 @@ Sistema **Freemium** con cero costo de infraestructura y monetización inmediata
 
 ---
 
-## 🛠️ Configuración con Stripe (3 Pasos)
+## 🛠️ Configuración con Lemonsqueezy (3 Pasos)
 
-### Paso 1: Crear Cuenta Stripe
+### Paso 1: Crear Cuenta Lemonsqueezy
 
-1. **Ve a [Stripe.com](https://stripe.com/)**
+1. **Ve a [Lemonsqueezy.com](https://lemonsqueezy.com/)**
    - Crea una cuenta (gratis)
-   - **✅ Stripe acepta bancos chilenos directamente** (Banco de Chile, Santander, BCI, etc.)
+   - **🌍 Funciona en 135+ países** (Chile, EE.UU., Europa, Asia, etc.)
 
 2. **Completa verificación de identidad**:
-   - RUT chileno
-   - Información fiscal
-   - Cuenta bancaria chilena (cuenta corriente o vista)
+   - Email de confirmación
+   - Información fiscal básica
+   - Cuenta bancaria (acepta bancos de cualquier país)
 
-3. **Costos de Stripe**:
-   - 3.6% + $100 CLP por transacción exitosa
+3. **Costos de Lemonsqueezy**:
+   - **5% + $0.50 USD** por transacción exitosa
    - **Sin costos mensuales fijos**
    - **Sin costos de setup**
-   - Transferencias a banco chileno: **GRATIS**
+   - Transferencias a tu banco: **GRATIS**
+   - **Manejo automático de impuestos** (IVA, sales tax, GST, etc.)
 
 ---
 
-### Paso 2: Crear Payment Link (Sin código)
+### Paso 2: Crear Producto y Checkout (Sin código)
 
-1. **Ve a Stripe Dashboard → Products**
-   - Click en "Add Product"
+1. **Ve a Lemonsqueezy Dashboard → Products**
+   - Click en "New Product"
 
 2. **Configurar Producto**:
    ```
    Nombre: PromptGG Premium
-   Descripción: Acceso ilimitado a generador de prompts profesional
+   Descripción: Acceso ilimitado a generador de prompts profesional con IA
    Precio: $4.99 USD
-   Tipo: Recurring (mensual)
+   Tipo: Subscription (Recurring)
+   Intervalo: Monthly
    ```
 
-3. **Crear Payment Link**:
-   - Click en "Create Payment Link"
-   - Success URL: `https://promptgg.app/es/premium-success?session_id={CHECKOUT_SESSION_ID}`
-   - Cancel URL: `https://promptgg.app/es/generator`
+3. **Crear Variant** (Plan):
+   - Name: "Monthly Premium"
+   - Price: $4.99 USD
+   - Billing interval: Every 1 month
 
-4. **Copiar tu Payment Link**:
+4. **Configurar Checkout Settings**:
+   - **Success URL**: `https://promptgg.app/{locale}/premium-success?order_id={order_id}`
+   - **Cancel URL**: `https://promptgg.app/{locale}/generator`
+   - **Email receipts**: Enabled ✅
+   - **Multiple languages**: Enabled ✅ (Auto-detecta idioma del navegador)
+
+5. **Copiar tu Checkout URL**:
    ```
-   https://buy.stripe.com/XXXXXXXXXXXXXX
+   https://promptgg.lemonsqueezy.com/buy/12345678-abcd-1234-abcd-123456789abc
    ```
 
-5. **Actualizar en el código**:
+6. **Actualizar en el código**:
    ```tsx
    // src/components/UpgradeModal.tsx línea 22
-   window.open("https://buy.stripe.com/TU_PAYMENT_LINK_AQUI", "_blank");
+   window.open("https://promptgg.lemonsqueezy.com/buy/TU_VARIANT_ID_AQUI", "_blank");
    ```
 
 ---
 
-### Paso 3: Google AdSense (Opcional)
+### Paso 3: Agregar tu Banco (Cualquier País)
+
+1. **Ve a Settings → Payouts**
+
+2. **Click en "Add payout method"**
+
+3. **Completa información bancaria**:
+
+#### 🇨🇱 Para Chile:
+```
+País: Chile
+Banco: [Banco de Chile, Santander, BCI, Estado, etc.]
+Tipo: Cuenta Corriente o Vista
+Número de cuenta: [Tu número completo]
+RUT: XX.XXX.XXX-X
+Nombre del titular: [Debe coincidir con RUT]
+```
+
+#### 🇺🇸 Para EE.UU.:
+```
+Routing number: [9 dígitos]
+Account number: [Tu número de cuenta]
+Account type: Checking o Savings
+```
+
+#### 🇪🇺 Para Europa:
+```
+IBAN: [Tu IBAN completo]
+BIC/SWIFT: [Código del banco]
+```
+
+#### 🌍 Para otros países:
+- Lemonsqueezy soporta transferencias bancarias internacionales
+- También acepta PayPal como método de pago
+
+4. **Frecuencia de pagos**:
+   - Mínimo: $50 USD acumulados
+   - Automático: Semanal o mensual
+   - Manual: Cuando tú quieras
+
+---
+
+### Paso 4: Google AdSense (Opcional)
 
 1. **Aplicar a AdSense**:
+   - Ve a [Google AdSense](https://www.google.com/adsense/)
+   - Aplica con tu dominio `promptgg.app`
+   - Espera aprobación (1-2 semanas)
+
+2. **Obtener tu ID de AdSense**:
+   ```
+   ca-pub-XXXXXXXXXXXXXXXX
+   ```
+
+3. **Actualizar en el código**:
+   ```tsx
+   // src/components/AdSenseSlot.tsx línea 36
+   data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+   ```
+
+4. **Agregar slots en las páginas**:
+   ```tsx
+   // Ejemplo: src/app/[locale]/generator/page.tsx
+   import AdSenseSlot from "@/components/AdSenseSlot";
+   
+   // Arriba del generador
+   <AdSenseSlot slot="1234567890" format="rectangle" />
+   
+   // Al final de la página
+   <AdSenseSlot slot="0987654321" format="horizontal" />
+   ```
+
+---
+
+## 🌍 Ventajas de Lemonsqueezy (Global)
+
+| Característica | Lemonsqueezy | Stripe | Gumroad | Mercado Pago |
+|---------------|--------------|--------|---------|--------------|
+| **Países soportados** | 135+ 🌍 | ~45 | Global | Solo LATAM |
+| **Live mode en Chile** | ✅ Sí | ❌ No | ✅ Sí | ✅ Sí |
+| **Europa/Asia/África** | ✅ Sí | ✅ Sí | ✅ Sí | ❌ No |
+| **Manejo de impuestos** | ✅ Automático | Manual | Básico | Solo LATAM |
+| **Comisión** | 5% + $0.50 | 3.6%+ | 10% | 4.99%+ |
+| **Checkout multiidioma** | ✅ Automático | Manual | Inglés | Español |
+| **Setup tiempo** | 15 min | ❌ | 10 min | 30 min |
+| **Profesionalismo** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
+| **Soporte 24/7** | ✅ Email | ✅ Chat | ✅ Email | ⚠️ Horario |
+
+### 💡 Cálculo Real Global:
+
+**Venta de $4.99 USD desde cualquier país**:
+
+Con **Lemonsqueezy**:
+```
+$4.99 USD
+- 5% comisión = $0.25
+- Fee fijo = $0.50
+= $4.24 USD neto ✅
+(85% del total)
+
+Conversión a tu moneda local:
+Chile: $4.24 USD = ~$3,816 CLP
+España: $4.24 USD = ~€3.90 EUR
+México: $4.24 USD = ~$85 MXN
+```
+
+**💰 Lemonsqueezy maneja TODO**: IVA, sales tax, GST, impuestos locales
+
+---
+
+## 💵 Proyección de Ingresos Global
+
+### Mes 1 (1,000 visitantes/día - tráfico global)
    - Ve a [Google AdSense](https://www.google.com/adsense/)
    - Aplica con tu dominio `promptgg.app`
    - Espera aprobación (1-2 semanas)
@@ -189,51 +307,20 @@ $4.99 USD
 - **Total infraestructura**: **$0 CLP/mes** ✅
 
 ---
-   - Ve a [Google AdSense](https://www.google.com/adsense/)
-   - Aplica con tu dominio `promptgg.app`
-   - Espera aprobación (1-2 semanas)
-
-2. **Obtener tu ID de AdSense**:
-   ```
-   ca-pub-XXXXXXXXXXXXXXXX
-   ```
-
-3. **Actualizar en el código**:
-   ```tsx
-   // src/components/AdSenseSlot.tsx línea 36
-   data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-   ```
-
-4. **Agregar slots en las páginas**:
-   ```tsx
-   // Ejemplo: src/app/[locale]/generator/page.tsx
-   import AdSenseSlot from "@/components/AdSenseSlot";
-   
-   // Arriba del generador
-   <AdSenseSlot slot="1234567890" format="rectangle" />
-   
-   // Al final de la página
-   <AdSenseSlot slot="0987654321" format="horizontal" />
-   ```
-
----
-
-## 💵 Proyección de Ingresos
-
-### Mes 1 (1,000 visitantes/día)
+### Mes 1 (1,000 visitantes/día - tráfico global)
 - **AdSense**: ~$150-300/mes
-- **Premium** (2% conversión): 20 usuarios × $4.99 = $99.80/mes
-- **Total**: ~$250-400/mes
+- **Premium Lemonsqueezy** (2% conversión): 20 usuarios × $4.24 = $84.80/mes
+- **Total**: ~$235-385/mes
 
-### Mes 6 (5,000 visitantes/día)
+### Mes 6 (5,000 visitantes/día - escala global)
 - **AdSense**: ~$750-1,500/mes
-- **Premium** (3% conversión): 150 usuarios × $4.99 = $748.50/mes
-- **Total**: ~$1,500-2,250/mes
+- **Premium Lemonsqueezy** (3% conversión): 150 usuarios × $4.24 = $636/mes
+- **Total**: ~$1,386-2,136/mes
 
-### Costos
+### Costos Fijos
 - **Vercel**: $0 (Hobby tier gratuito)
-- **Gumroad**: 10% + $0.30 por transacción
-- **Total**: $0 infraestructura fija
+- **Lemonsqueezy**: $0 (solo comisión por venta: 5% + $0.50)
+- **Total infraestructura**: **$0/mes** ✅
 
 ---
 
@@ -242,7 +329,7 @@ $4.99 USD
 ### Simular Usuario Premium:
 ```javascript
 // En consola del navegador
-localStorage.setItem('promptgg_license', 'STRIPE-TEST-LICENSE-KEY');
+localStorage.setItem('promptgg_license', 'LEMON-TEST-LICENSE-KEY');
 location.reload();
 ```
 
@@ -260,41 +347,72 @@ location.reload();
 
 ### Simular compra exitosa (desarrollo):
 ```
-http://localhost:3000/es/premium-success?session_id=cs_test_a1b2c3d4e5f6
+http://localhost:3000/es/premium-success?order_id=12345678
 ```
 
 ---
 
-## 🇨🇱 Configuración Específica para Chile
+## � Configuración Multi-País
 
-### Bancos Compatibles con Stripe:
-✅ Banco de Chile
-✅ Banco Santander
-✅ BCI (Banco de Crédito e Inversiones)
-✅ Banco Estado
-✅ Scotiabank
-✅ Itaú
-✅ Banco Security
-✅ Banco Falabella
-✅ Coopeuch
-✅ Y todos los demás bancos chilenos
+### 🇨🇱 Chile
+**Documentos necesarios**:
+- RUT (Rol Único Tributario)
+- Cuenta bancaria (Corriente, Vista o RUT)
+- Email de contacto
 
-### Documentos Necesarios:
-1. **RUT** (Rol Único Tributario)
-2. **Cuenta bancaria** (corriente o vista)
-3. **Dirección fiscal** en Chile
-4. **Email de contacto**
+**Bancos compatibles**:
+✅ Banco de Chile, Santander, BCI, Estado, Scotiabank, Itaú, Security, Falabella, Coopeuch, etc.
 
-### Tipos de Cuenta Bancaria:
-- ✅ **Cuenta Corriente** (recomendado)
-- ✅ **Cuenta Vista**
-- ✅ **Cuenta RUT** (Banco Estado)
+**Transferencias**:
+- Frecuencia: Semanal/Mensual
+- Costo: $0 (gratis)
+- Tiempo: 2-5 días hábiles
+- Moneda: USD → CLP (conversión automática)
 
-### Transferencias a tu Banco:
-- **Frecuencia**: Semanal (puedes cambiar a diaria)
-- **Costo**: $0 CLP (gratis)
-- **Tiempo**: 2-7 días hábiles
-- **Moneda**: CLP (conversión automática desde USD)
+---
+
+### 🇺🇸 Estados Unidos
+**Documentos necesarios**:
+- SSN o EIN
+- Cuenta bancaria o PayPal
+- Address verification
+
+**Bancos compatibles**:
+✅ Chase, Bank of America, Wells Fargo, Citibank, Capital One, etc.
+
+**Transferencias**:
+- ACH directo
+- 2-3 días hábiles
+- $0 comisión
+
+---
+
+### 🇪🇺 Europa
+**Documentos necesarios**:
+- VAT ID (si aplica)
+- IBAN
+- Proof of address
+
+**Bancos compatibles**:
+✅ Todos los bancos SEPA (España, Francia, Alemania, Italia, etc.)
+
+**Transferencias**:
+- SEPA transfer
+- 1-3 días hábiles
+- €0 comisión
+
+---
+
+### 🌏 Asia / Resto del mundo
+**Documentos necesarios**:
+- Tax ID local
+- Cuenta bancaria internacional
+- PayPal (alternativa)
+
+**Transferencias**:
+- Wire transfer internacional
+- 3-7 días hábiles
+- Lemonsqueezy cubre fees en mayoría de casos
 
 ---
 
@@ -314,16 +432,24 @@ http://localhost:3000/es/premium-success?session_id=cs_test_a1b2c3d4e5f6
 - `upgrade_click` 
 - `upgrade_complete`
 - `daily_limit_reached`
+- `user_country` (trackear de dónde vienen tus usuarios)
+
+### Métricas clave de Lemonsqueezy:
+- MRR (Monthly Recurring Revenue)
+- Churn rate
+- Customer LTV
+- Conversion rate por país
+- Revenue por país
 
 ---
 
 ## 🎯 Próximos Pasos (Opcionales)
 
 ### Mes 2-3: Autenticación Real
-- Clerk.com (gratis hasta 10k usuarios)
+- Clerk.com (gratis hasta 10k usuarios, global)
 - Historial de prompts en nube
 - Plantillas guardadas
-- Stripe Customer Portal (cancelaciones automáticas)
+- Lemonsqueezy Customer Portal (cancelaciones automáticas)
 
 ### Mes 4-6: Features Premium Adicionales
 - **Tier Pro**: $19.99/mes con API access
@@ -331,73 +457,120 @@ http://localhost:3000/es/premium-success?session_id=cs_test_a1b2c3d4e5f6
 - Exportar prompts a PDF/JSON
 - Análisis de efectividad
 - Workspace colaborativo
+- Priority support
 
-### Webhooks de Stripe (Avanzado):
+### Webhooks de Lemonsqueezy (Avanzado):
 Si quieres validar subscripciones en tiempo real:
 
 ```typescript
-// src/app/api/stripe-webhook/route.ts
+// src/app/api/lemonsqueezy-webhook/route.ts
 import { headers } from 'next/headers';
-import Stripe from 'stripe';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+import crypto from 'crypto';
 
 export async function POST(req: Request) {
   const body = await req.text();
-  const signature = headers().get('stripe-signature')!;
+  const signature = headers().get('x-signature');
+  
+  // Verificar firma del webhook
+  const secret = process.env.LEMONSQUEEZY_WEBHOOK_SECRET!;
+  const hash = crypto
+    .createHmac('sha256', secret)
+    .update(body)
+    .digest('hex');
 
-  let event: Stripe.Event;
-
-  try {
-    event = stripe.webhooks.constructEvent(
-      body,
-      signature,
-      process.env.STRIPE_WEBHOOK_SECRET!
-    );
-  } catch (err) {
-    return new Response('Webhook error', { status: 400 });
+  if (hash !== signature) {
+    return new Response('Invalid signature', { status: 401 });
   }
 
+  const event = JSON.parse(body);
+
   // Manejar eventos
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object;
-    // Guardar subscripción en base de datos
+  switch (event.meta.event_name) {
+    case 'order_created':
+      // Nueva compra
+      const orderId = event.data.id;
+      const customerEmail = event.data.attributes.user_email;
+      // Guardar en base de datos
+      break;
+      
+    case 'subscription_updated':
+      // Actualización de subscripción
+      break;
+      
+    case 'subscription_cancelled':
+      // Cancelación
+      break;
   }
 
   return new Response('Success', { status: 200 });
 }
 ```
 
+**Configurar en Lemonsqueezy**:
+1. Dashboard → Settings → Webhooks
+2. Add endpoint: `https://promptgg.app/api/lemonsqueezy-webhook`
+3. Select events: `order_created`, `subscription_updated`, `subscription_cancelled`
+4. Copy signing secret
+
+---
+
+## 💡 Tips para Maximizar Ingresos Globales
+
+### 1. Precios regionalizados (PPP - Purchasing Power Parity)
+Lemonsqueezy permite precios dinámicos por país:
+```
+EE.UU./Europa: $4.99/mes (precio base)
+LATAM: $2.99/mes (40% descuento)
+India/Asia: $1.99/mes (60% descuento)
+```
+
+### 2. Cupones de descuento
+- First-time: 20% off
+- Black Friday: 50% off
+- Referral: 30% off
+
+### 3. Trial period
+- 7 días gratis (sin tarjeta)
+- Incrementa conversión ~15-25%
+
+### 4. Upsell anual
+- Plan anual: $49.99/año (ahorra $9.89)
+- Pago único, menos churn
+
 ---
 
 ## 📞 Soporte
 
 Si necesitas ayuda:
-1. **Stripe Dashboard** → Support (chat en vivo)
+1. **Lemonsqueezy Dashboard** → Help (chat/email)
 2. Revisa este README completo
 3. Verifica la consola del navegador (F12)
 4. Prueba con `localStorage` manual
 
-**Soporte Stripe Chile**:
-- Email: support@stripe.com
-- Documentación: https://stripe.com/docs
-- Status: https://status.stripe.com
+**Soporte Lemonsqueezy**:
+- Email: hello@lemonsqueezy.com
+- Docs: https://docs.lemonsqueezy.com
+- Status: https://status.lemonsqueezy.com
+- Community: Discord oficial
 
 ---
 
 ## ✨ Resultado Final
 
-**Sistema de monetización listo** con:
+**Sistema de monetización global listo** con:
 - ✅ Zero costo de infraestructura
 - ✅ Dos fuentes de ingreso (Ads + Premium)
-- ✅ **Depósitos directos a bancos chilenos** 🇨🇱
-- ✅ Sin intermediarios (Wise/Payoneer)
-- ✅ Comisiones más bajas (3.6% vs 10%)
+- ✅ **Funciona en 135+ países** 🌍
+- ✅ **Depósitos directos a bancos locales** (Chile incluido)
+- ✅ Sin intermediarios necesarios
+- ✅ **Manejo automático de impuestos**
+- ✅ Checkout multiidioma automático
 - ✅ Escalable sin backend
 - ✅ Implementación inmediata
 
-**Tiempo total de setup**: 1-2 horas
+**Tiempo total de setup**: 15-30 minutos
 **Tiempo hasta primer ingreso**: 24-48 horas
-**Comisión real**: 3.6% + $100 CLP por venta
+**Comisión real**: 5% + $0.50 USD por venta
+**Alcance**: Global (EE.UU., Europa, LATAM, Asia, África, Oceanía)
 
-¡Buena suerte! 🚀💰🇨🇱
+¡Buena suerte con tu proyecto global! 🚀💰�

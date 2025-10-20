@@ -21,8 +21,8 @@ export default function UpgradeModal({
   if (!isOpen) return null;
 
   const handleUpgrade = () => {
-    // Redirigir a Stripe Payment Link (cambiar esta URL por tu Payment Link real)
-    window.open("https://buy.stripe.com/test_XXXXXXXXXXXXXX", "_blank");
+    // Redirigir a Lemonsqueezy Checkout (cambiar esta URL por tu Checkout URL real)
+    window.open("https://promptgg.lemonsqueezy.com/buy/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX", "_blank");
   };
 
   return (
