@@ -75,7 +75,7 @@ export default function Footer({ locale }: { locale: string }) {
             <h4 className="font-semibold mb-4">{t("footer.contact")}</h4>
             <div className="flex gap-4">
               <a
-                href="https://github.com"
+                href="https://github.com/mcrelativity"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg hover:bg-slate-800 transition"
@@ -83,7 +83,7 @@ export default function Footer({ locale }: { locale: string }) {
                 <Github size={20} />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://https://x.com/namtaflabs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg hover:bg-slate-800 transition"
@@ -91,7 +91,7 @@ export default function Footer({ locale }: { locale: string }) {
                 <Twitter size={20} />
               </a>
               <a
-                href="mailto:contact@promptgg.app"
+                href="mailto:gomez.emiliano762@gmail.com"
                 className="p-2 rounded-lg hover:bg-slate-800 transition"
               >
                 <Mail size={20} />

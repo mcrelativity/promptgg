@@ -21,8 +21,16 @@ export default function UpgradeModal({
   if (!isOpen) return null;
 
   const handleUpgrade = () => {
-    // Redirigir a Lemonsqueezy Checkout
-    window.open("https://namtaflabs.lemonsqueezy.com/buy/3aa997f9-b09e-429a-b1f4-8e866f79fb62?media=0&logo=0&discount=0", "_blank");
+    // Detectar idioma actual
+    const currentLocale = typeof window !== 'undefined' 
+      ? window.location.pathname.split('/')[1] || 'es'
+      : 'es';
+
+    // URL de checkout con parámetro de redirección
+    const checkoutUrl = `https://namtaflabs.lemonsqueezy.com/buy/3aa997f9-b09e-429a-b1f4-8e866f79fb62?checkout[custom][locale]=${currentLocale}&media=0&logo=0&discount=0`;
+    
+    // Abrir en la misma pestaña para que funcione la redirección
+    window.location.href = checkoutUrl;
   };
 
   return (
@@ -135,6 +143,12 @@ export default function UpgradeModal({
               <span>🔒 {t("premium.securePayment")}</span>
               <span>✓ {t("premium.instantAccess")}</span>
             </div>
+            <p className="text-xs text-center text-slate-600 mt-3">
+              Después del pago, activa tu cuenta en{" "}
+              <a href={`/${typeof window !== 'undefined' ? window.location.pathname.split('/')[1] : 'es'}/activate`} className="text-blue-400 hover:underline">
+                /activate
+              </a>
+            </p>
           </div>
         </div>
       </div>
