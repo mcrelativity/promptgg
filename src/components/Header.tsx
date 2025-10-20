@@ -47,7 +47,7 @@ export default function Header({ locale }: { locale: string }) {
               className="hover:text-purple-400 transition flex items-center gap-1"
             >
               <Sparkles size={16} className="text-purple-400" />
-              {t("nav.history")}
+              {t("History")}
             </Link>
           )}
           
