@@ -3,7 +3,9 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { Copy, Save, RefreshCw, Sparkles } from "lucide-react";
+import { Copy, Save, RefreshCw, Sparkles, Crown, Zap } from "lucide-react";
+import { usePremium } from "@/hooks/usePremium";
+import UpgradeModal from "@/components/UpgradeModal";
 
 const models = [
   { id: "chatgpt", name: "ChatGPT", company: "OpenAI" },
@@ -202,6 +204,16 @@ export default function Generator() {
   // Obtener los tonos según el idioma
   const tones = tonesConfig[currentLocale as keyof typeof tonesConfig] || tonesConfig.es;
 
+  // Premium hook
+  const { 
+    isPremium, 
+    usedToday, 
+    dailyLimit, 
+    remainingToday, 
+    canGenerate, 
+    incrementUsage 
+  } = usePremium();
+
   const [selectedModel, setSelectedModel] = useState<string>(
     modelFromUrl || "chatgpt"
   );
@@ -212,6 +224,7 @@ export default function Generator() {
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [savedPrompts, setSavedPrompts] = useState<string[]>([]);
   const [isCopied, setIsCopied] = useState(false);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
 
   // Load saved prompts from localStorage
   useEffect(() => {
@@ -231,6 +244,12 @@ export default function Generator() {
       return;
     }
 
+    // Verificar límite
+    if (!canGenerate) {
+      setShowUpgradeModal(true);
+      return;
+    }
+
     const prompt = generatePrompt(
       selectedModel,
       task,
@@ -240,6 +259,9 @@ export default function Generator() {
       currentLocale
     );
     setGeneratedPrompt(prompt);
+    
+    // Incrementar contador de uso
+    incrementUsage();
   };
 
   const handleCopy = async () => {
@@ -272,9 +294,31 @@ export default function Generator() {
     <div className="min-h-screen pt-24 pb-20 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
-          <div className="inline-block px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-4">
-            <span className="text-sm text-blue-400 font-medium">{t("generator.badge")}</span>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="inline-block px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20">
+              <span className="text-sm text-blue-400 font-medium">{t("generator.badge")}</span>
+            </div>
+            
+            {/* Premium badge o contador */}
+            {isPremium ? (
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20">
+                <Crown size={16} className="text-yellow-400" />
+                <span className="text-sm text-yellow-400 font-medium">{t("premium.premiumBadge")}</span>
+              </div>
+            ) : (
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700">
+                <Zap size={16} className="text-blue-400" />
+                <span className="text-sm text-slate-300">
+                  {remainingToday === 0 ? (
+                    <span className="text-red-400">{t("premium.limitReached")}</span>
+                  ) : (
+                    t("premium.remaining").replace("{count}", remainingToday.toString())
+                  )}
+                </span>
+              </div>
+            )}
           </div>
+
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
             {t("generator.title")}
           </h1>
@@ -439,6 +483,14 @@ export default function Generator() {
           </div>
         </div>
       </div>
+
+      {/* Upgrade Modal */}
+      <UpgradeModal
+        isOpen={showUpgradeModal}
+        onClose={() => setShowUpgradeModal(false)}
+        usedToday={usedToday}
+        dailyLimit={dailyLimit}
+      />
     </div>
   );
 }

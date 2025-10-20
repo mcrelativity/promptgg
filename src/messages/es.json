@@ -93,6 +93,24 @@
     "tip5": "Proporciona ejemplos del resultado deseado cuando sea posible",
     "tip6": "Itera: Si el resultado no es perfecto, ajusta el prompt y prueba de nuevo"
   },
+  "premium": {
+    "title": "Actualiza a Premium",
+    "subtitle": "Has alcanzado tu límite diario. Desbloquea acceso ilimitado.",
+    "usageToday": "Uso de hoy",
+    "feature1": "Prompts ilimitados por día",
+    "feature2": "Sin anuncios",
+    "feature3": "Historial de prompts guardados",
+    "perMonth": "/ mes",
+    "cancelAnytime": "Cancela cuando quieras",
+    "upgradeButton": "Actualizar a Premium",
+    "maybeLater": "Tal vez más tarde",
+    "securePayment": "Pago Seguro",
+    "instantAccess": "Acceso Instantáneo",
+    "limitReached": "Límite alcanzado",
+    "limitMessage": "Has usado {used} de {limit} prompts gratis hoy",
+    "remaining": "{count} prompts restantes hoy",
+    "premiumBadge": "Premium"
+  },
   "footer": {
     "made_by": "Hecho con ❤️ por",
     "rights": "© 2025 PromptGG. Todos los derechos reservados.",

@@ -93,6 +93,24 @@
     "tip5": "Provide examples of the desired output when possible",
     "tip6": "Iterate: If the result isn't perfect, adjust the prompt and try again"
   },
+  "premium": {
+    "title": "Upgrade to Premium",
+    "subtitle": "You've reached your daily limit. Unlock unlimited access.",
+    "usageToday": "Today's usage",
+    "feature1": "Unlimited prompts per day",
+    "feature2": "No ads",
+    "feature3": "Saved prompts history",
+    "perMonth": "/ month",
+    "cancelAnytime": "Cancel anytime",
+    "upgradeButton": "Upgrade to Premium",
+    "maybeLater": "Maybe later",
+    "securePayment": "Secure Payment",
+    "instantAccess": "Instant Access",
+    "limitReached": "Limit reached",
+    "limitMessage": "You've used {used} of {limit} free prompts today",
+    "remaining": "{count} prompts remaining today",
+    "premiumBadge": "Premium"
+  },
   "footer": {
     "made_by": "Made with ❤️ by",
     "rights": "© 2025 PromptGG. All rights reserved.",
