@@ -15,7 +15,8 @@ export default function Header({ locale }: { locale: string }) {
   const { isPremium, usedToday, dailyLimit } = usePremium();
 
   return (
-    <header className="fixed w-full top-0 z-50 bg-slate-950/95 backdrop-blur border-b border-slate-800">
+    <>
+      <header className="fixed w-full top-0 z-50 bg-slate-950/95 backdrop-blur border-b border-slate-800">
       <nav className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link href={`/${locale}`} className="flex items-center gap-2">
@@ -102,14 +103,15 @@ export default function Header({ locale }: { locale: string }) {
           </div>
         </div>
       )}
+      </header>
       
-      {/* Upgrade Modal */}
+      {/* Upgrade Modal - Fuera del header para evitar z-index issues */}
       <UpgradeModal
         isOpen={showUpgradeModal}
         onClose={() => setShowUpgradeModal(false)}
         usedToday={usedToday}
         dailyLimit={dailyLimit}
       />
-    </header>
+    </>
   );
 }

@@ -2,6 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { X, Crown, Sparkles, Zap, Clock, Check } from "lucide-react";
+import { createPortal } from "react-dom";
+import { useEffect, useState } from "react";
 
 interface UpgradeModalProps {
   isOpen: boolean;
@@ -17,8 +19,13 @@ export default function UpgradeModal({
   dailyLimit,
 }: UpgradeModalProps) {
   const t = useTranslations();
+  const [mounted, setMounted] = useState(false);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !mounted) return null;
 
   const handleUpgrade = () => {
     // Detectar idioma actual
@@ -33,10 +40,11 @@ export default function UpgradeModal({
     window.location.href = checkoutUrl;
   };
 
-  return (
+  const modalContent = (
     <div 
-      className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm overflow-y-auto"
+      className="fixed inset-0 z-[9999] bg-black/70 backdrop-blur-sm overflow-y-auto"
       onClick={onClose}
+      style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
     >
       <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8">
         <div 
@@ -162,4 +170,6 @@ export default function UpgradeModal({
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 }
