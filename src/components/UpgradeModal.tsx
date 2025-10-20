@@ -34,7 +34,7 @@ export default function UpgradeModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/70 backdrop-blur-sm overflow-y-auto">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/70 backdrop-blur-sm overflow-y-auto">
       <div className="relative w-full max-w-lg my-8 bg-gradient-to-br from-slate-900 to-slate-950 rounded-2xl border border-slate-700 shadow-2xl">
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 pointer-events-none rounded-2xl" />
