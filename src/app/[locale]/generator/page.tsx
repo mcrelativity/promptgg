@@ -268,13 +268,13 @@ export default function Generator() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
           <div className="inline-block px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-4">
-            <span className="text-sm text-blue-400 font-medium">Generador Inteligente</span>
+            <span className="text-sm text-blue-400 font-medium">{t("generator.badge")}</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
             {t("generator.title")}
           </h1>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Crea prompts optimizados para obtener los mejores resultados de tu modelo de IA
+            {t("generator.description")}
           </p>
         </div>
 
@@ -307,7 +307,7 @@ export default function Generator() {
               <textarea
                 value={task}
                 onChange={(e) => setTask(e.target.value)}
-                placeholder="Ej: Escribe un artículo sobre inteligencia artificial..."
+                placeholder={t("generator.taskPlaceholder")}
                 rows={5}
                 className="w-full px-4 py-3 rounded-lg bg-slate-800/80 backdrop-blur border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all resize-none hover:border-slate-600"
               />
@@ -335,12 +335,12 @@ export default function Generator() {
             <div>
               <label className="block text-sm font-semibold mb-3 text-slate-300">
                 {t("generator.context")}
-                <span className="ml-2 text-xs text-slate-500">(Opcional)</span>
+                <span className="ml-2 text-xs text-slate-500">({t("generator.optional")})</span>
               </label>
               <textarea
                 value={context}
                 onChange={(e) => setContext(e.target.value)}
-                placeholder="Proporciona contexto adicional..."
+                placeholder={t("generator.contextPlaceholder")}
                 rows={3}
                 className="w-full px-4 py-3 rounded-lg bg-slate-800/80 backdrop-blur border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all resize-none hover:border-slate-600"
               />
@@ -350,12 +350,12 @@ export default function Generator() {
             <div>
               <label className="block text-sm font-semibold mb-3 text-slate-300">
                 {t("generator.constraints")}
-                <span className="ml-2 text-xs text-slate-500">(Opcional)</span>
+                <span className="ml-2 text-xs text-slate-500">({t("generator.optional")})</span>
               </label>
               <textarea
                 value={constraints}
                 onChange={(e) => setConstraints(e.target.value)}
-                placeholder="Ej: Máximo 500 palabras, formato JSON..."
+                placeholder={t("generator.constraintsPlaceholder")}
                 rows={3}
                 className="w-full px-4 py-3 rounded-lg bg-slate-800/80 backdrop-blur border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all resize-none hover:border-slate-600"
               />
@@ -375,7 +375,7 @@ export default function Generator() {
                 className="px-6 py-4 border border-slate-700 rounded-lg font-semibold hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 flex items-center gap-2 transform hover:-translate-y-0.5 active:translate-y-0"
               >
                 <RefreshCw size={18} />
-                Limpiar
+                {t("generator.clear")}
               </button>
             </div>
           </div>
@@ -386,11 +386,11 @@ export default function Generator() {
               <div className="p-8 rounded-xl bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur border border-slate-700/50 shadow-2xl">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    Prompt Generado
+                    {t("generator.outputTitle")}
                   </h2>
                   {generatedPrompt && (
                     <span className="px-3 py-1 text-xs font-medium bg-green-500/10 text-green-400 border border-green-500/20 rounded-full">
-                      Listo
+                      {t("generator.outputReady")}
                     </span>
                   )}
                 </div>
@@ -409,7 +409,7 @@ export default function Generator() {
                         className="flex-1 flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 rounded-lg font-semibold transition-all duration-300 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transform hover:-translate-y-0.5"
                       >
                         <Copy size={18} />
-                        {isCopied ? "¡Copiado!" : t("generator.copy")}
+                        {isCopied ? t("generator.copied") : t("generator.copy")}
                       </button>
                       <button
                         onClick={handleSave}
@@ -424,10 +424,10 @@ export default function Generator() {
                   <div className="h-80 flex flex-col items-center justify-center text-slate-500">
                     <Sparkles className="w-12 h-12 mb-4 text-slate-600" />
                     <p className="text-center text-lg font-medium mb-2">
-                      Tu prompt aparecerá aquí
+                      {t("generator.emptyTitle")}
                     </p>
                     <p className="text-center text-sm text-slate-600">
-                      Completa el formulario y haz clic en generar
+                      {t("generator.emptyDescription")}
                     </p>
                   </div>
                 )}

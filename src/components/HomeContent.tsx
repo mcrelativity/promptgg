@@ -26,7 +26,7 @@ export default function HomeContent({ locale }: { locale: string }) {
         <div className="max-w-5xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
             <Sparkles size={16} className="text-blue-400" />
-            <span className="text-sm text-blue-300">AI Prompt Engineering</span>
+            <span className="text-sm text-blue-300">{t("hero.badge")}</span>
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -57,18 +57,18 @@ export default function HomeContent({ locale }: { locale: string }) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-20">
             <div className="p-6 rounded-lg bg-slate-800/50 border border-slate-700">
               <Brain size={32} className="mx-auto mb-4 text-blue-400" />
-              <h3 className="font-semibold mb-2">Específico</h3>
-              <p className="text-sm text-slate-400">Resultados precisos y relevantes</p>
+              <h3 className="font-semibold mb-2">{t("hero.card1_title")}</h3>
+              <p className="text-sm text-slate-400">{t("hero.card1_desc")}</p>
             </div>
             <div className="p-6 rounded-lg bg-slate-800/50 border border-slate-700">
               <Sparkles size={32} className="mx-auto mb-4 text-purple-400" />
-              <h3 className="font-semibold mb-2">Inteligente</h3>
-              <p className="text-sm text-slate-400">Optimizado para cada modelo</p>
+              <h3 className="font-semibold mb-2">{t("hero.card2_title")}</h3>
+              <p className="text-sm text-slate-400">{t("hero.card2_desc")}</p>
             </div>
             <div className="p-6 rounded-lg bg-slate-800/50 border border-slate-700">
               <Zap size={32} className="mx-auto mb-4 text-yellow-400" />
-              <h3 className="font-semibold mb-2">Rápido</h3>
-              <p className="text-sm text-slate-400">Prompts efectivos al instante</p>
+              <h3 className="font-semibold mb-2">{t("hero.card3_title")}</h3>
+              <p className="text-sm text-slate-400">{t("hero.card3_desc")}</p>
             </div>
           </div>
         </div>
@@ -102,16 +102,16 @@ export default function HomeContent({ locale }: { locale: string }) {
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            ¿Listo para mejorar tus prompts?
+            {t("hero.cta_title")}
           </h2>
           <p className="text-xl text-slate-400 mb-8">
-            Comienza ahora y descubre cómo escribir prompts que realmente funcionen
+            {t("hero.cta_desc")}
           </p>
           <Link
             href={`/${locale}/generator`}
             className="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition transform hover:scale-105"
           >
-            Abrir Generador
+            {t("hero.cta_button")}
           </Link>
         </div>
       </section>

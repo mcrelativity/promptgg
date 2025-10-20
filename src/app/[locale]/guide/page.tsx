@@ -68,7 +68,7 @@ export default function Guide() {
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold mb-4">{t("guide.title")}</h1>
           <p className="text-xl text-slate-400">
-            Aprende las mejores prácticas para escribir prompts efectivos
+            {t("guide.subtitle")}
           </p>
         </div>
 
@@ -81,28 +81,28 @@ export default function Guide() {
 
         {/* Examples Section */}
         <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-8 mb-16">
-          <h2 className="text-2xl font-bold mb-6">Ejemplos Prácticos</h2>
+          <h2 className="text-2xl font-bold mb-6">{t("guide.practical_examples")}</h2>
 
           <div className="space-y-8">
             {/* Example 1 */}
             <div>
               <h3 className="text-lg font-semibold mb-3 text-blue-400">
-                ❌ Prompt Malo:
+                {t("guide.bad_prompt")}
               </h3>
               <div className="p-4 rounded-lg bg-slate-900 border border-red-500/30">
                 <p className="text-slate-300">
-                  &quot;Escribe un artículo sobre IA&quot;
+                  &quot;{t("guide.bad_example")}&quot;
                 </p>
               </div>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold mb-3 text-green-400">
-                ✅ Prompt Efectivo:
+                {t("guide.good_prompt")}
               </h3>
               <div className="p-4 rounded-lg bg-slate-900 border border-green-500/30">
                 <p className="text-slate-300">
-                  &quot;Actúa como un experto en tecnología. Escribe un artículo de 1500 palabras sobre cómo la inteligencia artificial está transformando el mercado laboral en 2025. Incluye: 1) Introducción, 2) Tres casos de uso reales, 3) Impacto económico, 4) Conclusión. Tono: profesional pero accesible. Formato: Markdown con títulos y viñetas.&quot;
+                  &quot;{t("guide.good_example")}&quot;
                 </p>
               </div>
             </div>
@@ -111,44 +111,32 @@ export default function Guide() {
 
         {/* Tips Section */}
         <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/30 rounded-lg p-8">
-          <h2 className="text-2xl font-bold mb-6">💡 Consejos Pro</h2>
+          <h2 className="text-2xl font-bold mb-6">{t("guide.pro_tips")}</h2>
 
           <ul className="space-y-4 text-slate-300">
             <li className="flex gap-3">
               <span className="text-blue-400 font-bold">1.</span>
-              <span>
-                Usa el generador de PromptGG para ahorrar tiempo y obtener prompts optimizados
-              </span>
+              <span>{t("guide.tip1")}</span>
             </li>
             <li className="flex gap-3">
               <span className="text-blue-400 font-bold">2.</span>
-              <span>
-                Siempre proporciona contexto: ¿Para quién? ¿Por qué? ¿Cuándo?
-              </span>
+              <span>{t("guide.tip2")}</span>
             </li>
             <li className="flex gap-3">
               <span className="text-blue-400 font-bold">3.</span>
-              <span>
-                Especifica el formato deseado (JSON, tabla, lista, pasos numerados)
-              </span>
+              <span>{t("guide.tip3")}</span>
             </li>
             <li className="flex gap-3">
               <span className="text-blue-400 font-bold">4.</span>
-              <span>
-                Asigna un rol a la IA: &quot;Actúa como un...&quot;, &quot;Eres un experto en...&quot;
-              </span>
+              <span>{t("guide.tip4")}</span>
             </li>
             <li className="flex gap-3">
               <span className="text-blue-400 font-bold">5.</span>
-              <span>
-                Proporciona ejemplos del resultado deseado cuando sea posible
-              </span>
+              <span>{t("guide.tip5")}</span>
             </li>
             <li className="flex gap-3">
               <span className="text-blue-400 font-bold">6.</span>
-              <span>
-                Itera: Si el resultado no es perfecto, ajusta el prompt y prueba de nuevo
-              </span>
+              <span>{t("guide.tip6")}</span>
             </li>
           </ul>
         </div>

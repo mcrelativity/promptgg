@@ -93,7 +93,7 @@ export default function ModelCard({ model, locale }: ModelCardProps) {
           <p className="text-sm text-slate-400 mb-3">{model.company}</p>
 
           <p className="text-sm text-slate-500 group-hover:text-slate-400 transition-colors">
-            Optimiza tus prompts para este modelo
+            {t("models.card_cta")}
           </p>
         </div>
       </div>
