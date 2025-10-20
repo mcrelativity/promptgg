@@ -3,6 +3,7 @@
     "home": "Home",
     "generator": "Generator",
     "guide": "Guide",
+    "activate": "Activate Premium",
     "about": "About",
     "contact": "Contact"
   },
@@ -92,6 +93,25 @@
     "tip4": "Assign a role to the AI: \"Act as a...\", \"You are an expert in...\"",
     "tip5": "Provide examples of the desired output when possible",
     "tip6": "Iterate: If the result isn't perfect, adjust the prompt and try again"
+  },
+  "history": {
+    "title": "Prompt History",
+    "subtitle": "Your saved prompts (Premium only)",
+    "empty_title": "No saved prompts",
+    "empty_description": "Saved prompts will appear here. This feature is only available for Premium users.",
+    "upgrade_message": "Upgrade to Premium to save and access your prompt history",
+    "date": "Date",
+    "model": "Model",
+    "task": "Task",
+    "prompt": "Prompt",
+    "delete": "Delete",
+    "clear_all": "Clear All",
+    "confirm_clear": "Delete all history?",
+    "confirm_yes": "Yes, delete",
+    "confirm_no": "Cancel",
+    "premium_required": "Premium History",
+    "premium_description": "Save your favorite prompts and access them anytime. Upgrade to Premium to unlock this feature.",
+    "items_count": "{count} saved prompts"
   },
   "premium": {
     "title": "Upgrade to Premium",

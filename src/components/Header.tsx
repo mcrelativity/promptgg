@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X, Crown } from "lucide-react";
+import { Menu, X, Crown, Sparkles } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { usePremium } from "@/hooks/usePremium";
 import UpgradeModal from "./UpgradeModal";
@@ -39,6 +39,28 @@ export default function Header({ locale }: { locale: string }) {
           <Link href={`/${locale}/guide`} className="hover:text-blue-400 transition">
             {t("nav.guide")}
           </Link>
+          
+          {/* Historial Link - Solo si es premium */}
+          {isPremium && (
+            <Link 
+              href={`/${locale}/history`} 
+              className="hover:text-purple-400 transition flex items-center gap-1"
+            >
+              <Sparkles size={16} className="text-purple-400" />
+              {t("nav.history")}
+            </Link>
+          )}
+          
+          {/* Activar Premium Link - Solo si NO es premium */}
+          {!isPremium && (
+            <Link 
+              href={`/${locale}/activate`} 
+              className="hover:text-green-400 transition flex items-center gap-1"
+            >
+              <Crown size={16} className="text-green-400" />
+              {t("nav.activate")}
+            </Link>
+          )}
           
           {/* Premium Button */}
           {!isPremium && (
@@ -100,6 +122,30 @@ export default function Header({ locale }: { locale: string }) {
             >
               {t("nav.guide")}
             </Link>
+            
+            {/* Historial - Mobile - Solo Premium */}
+            {isPremium && (
+              <Link
+                href={`/${locale}/history`}
+                className="hover:text-purple-400 transition flex items-center gap-2"
+                onClick={() => setIsOpen(false)}
+              >
+                <Sparkles size={16} className="text-purple-400" />
+                {t("nav.history")}
+              </Link>
+            )}
+            
+            {/* Activar Premium - Mobile */}
+            {!isPremium && (
+              <Link
+                href={`/${locale}/activate`}
+                className="hover:text-green-400 transition flex items-center gap-2"
+                onClick={() => setIsOpen(false)}
+              >
+                <Crown size={16} className="text-green-400" />
+                {t("nav.activate")}
+              </Link>
+            )}
           </div>
         </div>
       )}

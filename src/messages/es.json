@@ -4,6 +4,7 @@
     "generator": "Generador",
     "guide": "Guía",
     "history": "Historial",
+    "activate": "Activar Premium",
     "about": "Acerca",
     "contact": "Contacto"
   },
@@ -106,8 +107,11 @@
     "prompt": "Prompt",
     "delete": "Eliminar",
     "clear_all": "Limpiar Todo",
-    "confirm_delete": "¿Estás seguro de que quieres eliminar este prompt?",
-    "confirm_clear": "¿Estás seguro de que quieres eliminar todo el historial?",
+    "confirm_clear": "¿Eliminar todo el historial?",
+    "confirm_yes": "Sí, eliminar",
+    "confirm_no": "Cancelar",
+    "premium_required": "Historial Premium",
+    "premium_description": "Guarda tus prompts favoritos y accede a ellos en cualquier momento. Actualiza a Premium para desbloquear esta función.",
     "items_count": "{count} prompts guardados"
   },
   "premium": {
