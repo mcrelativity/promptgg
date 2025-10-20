@@ -83,7 +83,7 @@ export default function Footer({ locale }: { locale: string }) {
                 <Github size={20} />
               </a>
               <a
-                href="https://https://x.com/namtaflabs"
+                href="https://x.com/namtaflabs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg hover:bg-slate-800 transition"
