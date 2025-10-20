@@ -4,6 +4,7 @@ export default createMiddleware({
   locales: ["es", "en", "hi"],
   defaultLocale: "es",
   localePrefix: "always",
+  localeDetection: true, // ← Detecta automáticamente el idioma del navegador
 });
 
 export const config = {
