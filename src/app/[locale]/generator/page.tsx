@@ -221,6 +221,11 @@ export default function Generator() {
     }
   }, []);
 
+  // Actualizar el tono cuando cambia el idioma
+  useEffect(() => {
+    setTone(tones[0]);
+  }, [currentLocale, tones]);
+
   const handleGenerate = () => {
     if (!task.trim()) {
       return;
@@ -335,7 +340,6 @@ export default function Generator() {
             <div>
               <label className="block text-sm font-semibold mb-3 text-slate-300">
                 {t("generator.context")}
-                <span className="ml-2 text-xs text-slate-500">({t("generator.optional")})</span>
               </label>
               <textarea
                 value={context}
@@ -350,7 +354,6 @@ export default function Generator() {
             <div>
               <label className="block text-sm font-semibold mb-3 text-slate-300">
                 {t("generator.constraints")}
-                <span className="ml-2 text-xs text-slate-500">({t("generator.optional")})</span>
               </label>
               <textarea
                 value={constraints}
