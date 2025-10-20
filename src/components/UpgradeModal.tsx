@@ -21,8 +21,8 @@ export default function UpgradeModal({
   if (!isOpen) return null;
 
   const handleUpgrade = () => {
-    // Redirigir a Lemonsqueezy Checkout (cambiar esta URL por tu Checkout URL real)
-    window.open("https://promptgg.lemonsqueezy.com/buy/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX", "_blank");
+    // Redirigir a Lemonsqueezy Checkout
+    window.open("https://namtaflabs.lemonsqueezy.com/buy/3aa997f9-b09e-429a-b1f4-8e866f79fb62?media=0&logo=0&discount=0", "_blank");
   };
 
   return (
