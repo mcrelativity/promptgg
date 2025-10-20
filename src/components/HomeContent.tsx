@@ -6,14 +6,14 @@ import { ArrowRight, Sparkles, Brain, Zap } from "lucide-react";
 import ModelCard from "@/components/ModelCard";
 
 const models = [
-  { id: "chatgpt", icon: "🤖", company: "OpenAI" },
-  { id: "claude", icon: "🧠", company: "Anthropic" },
-  { id: "gemini", icon: "✨", company: "Google" },
-  { id: "grok", icon: "⚡", company: "xAI" },
-  { id: "llama", icon: "🦙", company: "Meta" },
-  { id: "mistral", icon: "🎯", company: "Mistral AI" },
-  { id: "perplexity", icon: "🔍", company: "Perplexity AI" },
-  { id: "deepseek", icon: "🌊", company: "DeepSeek" },
+  { id: "chatgpt", company: "OpenAI" },
+  { id: "claude", company: "Anthropic" },
+  { id: "gemini", company: "Google" },
+  { id: "grok", company: "xAI" },
+  { id: "llama", company: "Meta" },
+  { id: "mistral", company: "Mistral AI" },
+  { id: "perplexity", company: "Perplexity AI" },
+  { id: "deepseek", company: "DeepSeek" },
 ];
 
 export default function HomeContent({ locale }: { locale: string }) {
