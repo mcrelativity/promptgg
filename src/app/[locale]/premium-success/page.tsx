@@ -7,7 +7,7 @@ import { usePremium } from "@/hooks/usePremium";
 
 interface PremiumSuccessProps {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ license?: string }>;
+  searchParams: Promise<{ session_id?: string }>;
 }
 
 export default function PremiumSuccess({ params, searchParams }: PremiumSuccessProps) {
@@ -15,16 +15,18 @@ export default function PremiumSuccess({ params, searchParams }: PremiumSuccessP
   const [locale, setLocale] = useState("es");
 
   useEffect(() => {
-    const activateLicense = async () => {
+    const activateFromStripe = async () => {
       const resolvedSearchParams = await searchParams;
-      const license = resolvedSearchParams.license;
+      const sessionId = resolvedSearchParams.session_id;
       
-      if (license) {
+      if (sessionId) {
+        // Generar una licencia basada en el session_id de Stripe
+        const license = `STRIPE-${sessionId.substring(0, 16).toUpperCase()}`;
         activatePremium(license);
       }
     };
     
-    activateLicense();
+    activateFromStripe();
   }, [searchParams, activatePremium]);
 
   useEffect(() => {

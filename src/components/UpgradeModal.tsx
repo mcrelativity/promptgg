@@ -21,8 +21,8 @@ export default function UpgradeModal({
   if (!isOpen) return null;
 
   const handleUpgrade = () => {
-    // Redirigir a Gumroad (cambiar esta URL por tu producto real)
-    window.open("https://promptgg.gumroad.com/l/premium", "_blank");
+    // Redirigir a Stripe Payment Link (cambiar esta URL por tu Payment Link real)
+    window.open("https://buy.stripe.com/test_XXXXXXXXXXXXXX", "_blank");
   };
 
   return (
