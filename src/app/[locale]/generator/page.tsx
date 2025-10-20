@@ -18,66 +18,189 @@ const models = [
   { id: "bard", name: "Bard", company: "Google" },
 ];
 
-const tones = ["Profesional", "Casual", "Académico", "Creativo", "Detallado"];
+// Definición multiidioma de tonos
+const tonesConfig = {
+  es: ["Profesional", "Casual", "Académico", "Creativo", "Detallado"],
+  en: ["Professional", "Casual", "Academic", "Creative", "Detailed"],
+  hi: ["पेशेवर", "आकस्मिक", "शैक्षणिक", "रचनात्मक", "विस्तृत"],
+};
 
 const generatePrompt = (
   selectedModel: string,
   task: string,
   tone: string,
   context: string,
-  constraints: string
+  constraints: string,
+  locale: string
 ): string => {
-  // Construir el prompt optimizado de forma inteligente
+  // Textos multiidioma
+  const i18n = {
+    es: {
+      roles: {
+        Profesional: "Actúa como un experto profesional altamente cualificado",
+        Casual: "Responde de manera conversacional, amigable y accesible",
+        Académico: "Actúa como un académico o investigador experto con rigor científico",
+        Creativo: "Actúa como un creativo innovador con pensamiento lateral",
+        Detallado: "Actúa como un analista exhaustivo y meticuloso que no omite ningún detalle",
+      },
+      task: "Tarea",
+      contextLabel: "Contexto adicional",
+      constraintsLabel: "Restricciones y requisitos",
+      outputFormat: "Formato de respuesta esperado",
+    },
+    en: {
+      roles: {
+        Professional: "Act as a highly qualified professional expert",
+        Casual: "Respond in a conversational, friendly and accessible manner",
+        Academic: "Act as an academic or expert researcher with scientific rigor",
+        Creative: "Act as an innovative creative with lateral thinking",
+        Detailed: "Act as a thorough and meticulous analyst who omits no detail",
+      },
+      task: "Task",
+      contextLabel: "Additional context",
+      constraintsLabel: "Constraints and requirements",
+      outputFormat: "Expected response format",
+    },
+    hi: {
+      roles: {
+        पेशेवर: "एक उच्च योग्य पेशेवर विशेषज्ञ के रूप में कार्य करें",
+        आकस्मिक: "संवादात्मक, मैत्रीपूर्ण और सुलभ तरीके से जवाब दें",
+        शैक्षणिक: "वैज्ञानिक कठोरता के साथ एक शैक्षणिक या विशेषज्ञ शोधकर्ता के रूप में कार्य करें",
+        रचनात्मक: "पार्श्व सोच वाले एक अभिनव रचनात्मक के रूप में कार्य करें",
+        विस्तृत: "एक गहन और सावधानीपूर्वक विश्लेषक के रूप में कार्य करें जो कोई विवरण नहीं छोड़ता",
+      },
+      task: "कार्य",
+      contextLabel: "अतिरिक्त संदर्भ",
+      constraintsLabel: "प्रतिबंध और आवश्यकताएँ",
+      outputFormat: "अपेक्षित प्रतिक्रिया प्रारूप",
+    },
+  };
+
+  type LocaleKey = keyof typeof i18n;
+  const lang = i18n[locale as LocaleKey] || i18n.es;
   let prompt = "";
 
-  // Agregar rol según el tono
-  const roles = {
-    Profesional: "Actúa como un experto profesional",
-    Casual: "Actúa de manera conversacional y amigable",
-    Académico: "Actúa como un académico o investigador experto",
-    Creativo: "Actúa como un creativo innovador",
-    Detallado: "Actúa como un analista exhaustivo y meticuloso",
+  // Helper para obtener el rol según tono
+  const getRole = (tone: string) => {
+    const roleKey = tone as keyof typeof lang.roles;
+    return lang.roles[roleKey] || Object.values(lang.roles)[0];
   };
 
-  prompt += roles[tone as keyof typeof roles] || roles.Profesional;
-  prompt += " y ayúdame con la siguiente tarea:\n\n";
-
-  // Agregar la tarea principal
-  prompt += `**Tarea:** ${task}\n\n`;
-
-  // Agregar contexto si existe
-  if (context && context.trim()) {
-    prompt += `**Contexto adicional:**\n${context}\n\n`;
+  // Técnicas específicas por modelo basadas en documentación oficial
+  
+  if (selectedModel === "chatgpt") {
+    // OpenAI recomienda: Role, Task, Context, Format, Tone
+    prompt += `${getRole(tone)}.\n\n`;
+    prompt += `${lang.task}: ${task}\n\n`;
+    if (context?.trim()) prompt += `${lang.contextLabel}: ${context}\n\n`;
+    if (constraints?.trim()) prompt += `${lang.constraintsLabel}: ${constraints}\n\n`;
+    prompt += locale === "es" ? "Proporciona una respuesta clara, estructurada y bien razonada." 
+      : locale === "en" ? "Provide a clear, structured and well-reasoned response."
+      : "स्पष्ट, संरचित और अच्छी तरह से तर्क किया गया जवाब प्रदान करें।";
+  }
+  
+  else if (selectedModel === "claude") {
+    // Anthropic recomienda: Usar XML tags, ser directo, pensar paso a paso
+    prompt += `${getRole(tone)}.\n\n`;
+    prompt += `<task>\n${task}\n</task>\n\n`;
+    if (context?.trim()) prompt += `<context>\n${context}\n</context>\n\n`;
+    if (constraints?.trim()) prompt += `<constraints>\n${constraints}\n</constraints>\n\n`;
+    prompt += locale === "es" 
+      ? "Piensa paso a paso y proporciona una respuesta reflexiva y bien fundamentada."
+      : locale === "en" 
+      ? "Think step by step and provide a thoughtful and well-founded response."
+      : "चरण दर चरण सोचें और एक विचारशील और अच्छी तरह से स्थापित प्रतिक्रिया प्रदान करें।";
+  }
+  
+  else if (selectedModel === "gemini") {
+    // Google recomienda: Ser específico, usar ejemplos, multi-turn
+    prompt += `${getRole(tone)}.\n\n`;
+    prompt += `## ${lang.task}\n${task}\n\n`;
+    if (context?.trim()) prompt += `## ${lang.contextLabel}\n${context}\n\n`;
+    if (constraints?.trim()) prompt += `## ${lang.constraintsLabel}\n${constraints}\n\n`;
+    prompt += locale === "es"
+      ? "Proporciona una respuesta completa con ejemplos prácticos cuando sea relevante."
+      : locale === "en"
+      ? "Provide a comprehensive response with practical examples when relevant."
+      : "प्रासंगिक होने पर व्यावहारिक उदाहरणों के साथ एक व्यापक प्रतिक्रिया प्रदान करें।";
+  }
+  
+  else if (selectedModel === "grok") {
+    // xAI (Grok) - directo, conciso, sin rodeos
+    prompt += `${getRole(tone)}.\n\n`;
+    prompt += `${task}\n\n`;
+    if (context?.trim()) prompt += `Context: ${context}\n\n`;
+    if (constraints?.trim()) prompt += `Requirements: ${constraints}\n\n`;
+    prompt += locale === "es"
+      ? "Sé directo y al grano. No uses palabras innecesarias."
+      : locale === "en"
+      ? "Be direct and to the point. Don't use unnecessary words."
+      : "सीधे मुद्दे पर आएं। अनावश्यक शब्दों का प्रयोग न करें।";
+  }
+  
+  else if (selectedModel === "llama" || selectedModel === "mistral") {
+    // Meta/Mistral - formato conversacional con instrucciones claras
+    prompt += `[INST] ${getRole(tone)}\n\n`;
+    prompt += `${lang.task}: ${task}\n`;
+    if (context?.trim()) prompt += `${lang.contextLabel}: ${context}\n`;
+    if (constraints?.trim()) prompt += `${lang.constraintsLabel}: ${constraints}\n`;
+    prompt += "[/INST]";
+  }
+  
+  else if (selectedModel === "perplexity") {
+    // Perplexity - enfoque en búsqueda y fuentes
+    prompt += `${getRole(tone)}.\n\n`;
+    prompt += `${task}\n\n`;
+    if (context?.trim()) prompt += `${lang.contextLabel}: ${context}\n\n`;
+    if (constraints?.trim()) prompt += `${lang.constraintsLabel}: ${constraints}\n\n`;
+    prompt += locale === "es"
+      ? "Proporciona una respuesta bien investigada citando fuentes relevantes cuando sea posible."
+      : locale === "en"
+      ? "Provide a well-researched response citing relevant sources when possible."
+      : "जहां संभव हो प्रासंगिक स्रोतों का हवाला देते हुए एक अच्छी तरह से शोधित प्रतिक्रिया प्रदान करें।";
+  }
+  
+  else if (selectedModel === "deepseek") {
+    // DeepSeek - análisis profundo y razonamiento
+    prompt += `${getRole(tone)}.\n\n`;
+    prompt += `${lang.task}: ${task}\n\n`;
+    if (context?.trim()) prompt += `${lang.contextLabel}: ${context}\n\n`;
+    if (constraints?.trim()) prompt += `${lang.constraintsLabel}: ${constraints}\n\n`;
+    prompt += locale === "es"
+      ? "Proporciona un análisis profundo con razonamiento detallado y fundamentado."
+      : locale === "en"
+      ? "Provide a deep analysis with detailed and well-founded reasoning."
+      : "विस्तृत और अच्छी तरह से स्थापित तर्क के साथ एक गहन विश्लेषण प्रदान करें।";
+  }
+  
+  else if (selectedModel === "copilot" || selectedModel === "bard") {
+    // Microsoft Copilot / Bard - práctico y orientado a soluciones
+    prompt += `${getRole(tone)}.\n\n`;
+    prompt += `${task}\n\n`;
+    if (context?.trim()) prompt += `${lang.contextLabel}: ${context}\n\n`;
+    if (constraints?.trim()) prompt += `${lang.constraintsLabel}: ${constraints}\n\n`;
+    prompt += locale === "es"
+      ? "Proporciona una respuesta práctica y orientada a soluciones."
+      : locale === "en"
+      ? "Provide a practical and solution-oriented response."
+      : "एक व्यावहारिक और समाधान-उन्मुख प्रतिक्रिया प्रदान करें।";
   }
 
-  // Agregar restricciones si existen
-  if (constraints && constraints.trim()) {
-    prompt += `**Restricciones y requisitos:**\n${constraints}\n\n`;
-  }
-
-  // Agregar instrucciones finales según el modelo
-  const modelInstructions: Record<string, string> = {
-    chatgpt: "Por favor, proporciona una respuesta clara, bien estructurada y directa.",
-    claude: "Por favor, proporciona una respuesta reflexiva y bien razonada.",
-    gemini: "Por favor, proporciona una respuesta completa con ejemplos cuando sea relevante.",
-    grok: "Por favor, sé directo y al grano en tu respuesta.",
-    llama: "Por favor, proporciona una respuesta detallada y bien explicada.",
-    mistral: "Por favor, proporciona una respuesta concisa pero completa.",
-    perplexity: "Por favor, proporciona una respuesta bien investigada con fuentes cuando sea posible.",
-    deepseek: "Por favor, proporciona un análisis profundo y fundamentado.",
-    copilot: "Por favor, proporciona una respuesta práctica y orientada a soluciones.",
-    bard: "Por favor, proporciona una respuesta creativa y bien articulada.",
-  };
-
-  prompt += modelInstructions[selectedModel] || modelInstructions.chatgpt;
-
-  return prompt;
+  return prompt.trim();
 };
 
 export default function Generator() {
   const t = useTranslations();
   const searchParams = useSearchParams();
   const modelFromUrl = searchParams.get("model");
+  
+  // Detectar el idioma actual desde la URL
+  const currentLocale = typeof window !== 'undefined' 
+    ? window.location.pathname.split('/')[1] || 'es'
+    : 'es';
+  
+  // Obtener los tonos según el idioma
+  const tones = tonesConfig[currentLocale as keyof typeof tonesConfig] || tonesConfig.es;
 
   const [selectedModel, setSelectedModel] = useState<string>(
     modelFromUrl || "chatgpt"
@@ -108,7 +231,8 @@ export default function Generator() {
       task,
       tone,
       context,
-      constraints
+      constraints,
+      currentLocale
     );
     setGeneratedPrompt(prompt);
   };
