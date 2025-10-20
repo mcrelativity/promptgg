@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { ArrowRight, Sparkles, Brain, Zap } from "lucide-react";
 import ModelCard from "@/components/ModelCard";
+import AdSenseSlot from "@/components/AdSenseSlot";
 
 const models = [
   { id: "chatgpt", company: "OpenAI" },
@@ -71,6 +72,16 @@ export default function HomeContent({ locale }: { locale: string }) {
               <p className="text-sm text-slate-400">{t("hero.card3_desc")}</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* AdSense - Banner intermedio */}
+      <section className="py-8 px-4">
+        <div className="max-w-4xl mx-auto">
+          <AdSenseSlot 
+            slot="5555555555" 
+            format="horizontal"
+          />
         </div>
       </section>
 

@@ -35,7 +35,7 @@ export default function AdSenseSlot({
       <ins
         className="adsbygoogle"
         style={{ display: "block" }}
-        data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" // Reemplazar con tu ID de AdSense
+        data-ad-client="ca-pub-3949583827065267"
         data-ad-slot={slot}
         data-ad-format={format}
         data-full-width-responsive="true"

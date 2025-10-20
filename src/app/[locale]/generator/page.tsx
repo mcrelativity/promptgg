@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Copy, Save, RefreshCw, Sparkles, Crown, Zap } from "lucide-react";
 import { usePremium } from "@/hooks/usePremium";
 import UpgradeModal from "@/components/UpgradeModal";
+import AdSenseSlot from "@/components/AdSenseSlot";
 
 const models = [
   { id: "chatgpt", name: "ChatGPT", company: "OpenAI" },
@@ -327,6 +328,15 @@ export default function Generator() {
           </p>
         </div>
 
+        {/* AdSense - Banner superior (solo usuarios gratuitos) */}
+        <div className="mb-8">
+          <AdSenseSlot 
+            slot="1234567890" 
+            format="horizontal"
+            className="max-w-4xl mx-auto"
+          />
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Input Section */}
           <div className="space-y-6">
@@ -482,6 +492,15 @@ export default function Generator() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* AdSense - Banner inferior (solo usuarios gratuitos) */}
+      <div className="max-w-7xl mx-auto px-4 mt-12">
+        <AdSenseSlot 
+          slot="9876543210" 
+          format="horizontal"
+          className="max-w-4xl mx-auto"
+        />
       </div>
 
       {/* Upgrade Modal */}
